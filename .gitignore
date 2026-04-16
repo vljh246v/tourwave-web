@@ -39,3 +39,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# harness
+/.worktrees/
+/logs/sessions/
+/logs/validators/
+
+# OS
+.DS_Store
+Thumbs.db
