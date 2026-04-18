@@ -8,7 +8,8 @@
 # =============================================================================
 set -euo pipefail
 
-WORKTREE_PATH="${1:-$(pwd)}"
+_RAW_WORKTREE="${1:-$(pwd)}"
+WORKTREE_PATH="$(cd "$_RAW_WORKTREE" && pwd)"
 PROJECT_ROOT="${2:-$(pwd)}"
 
 echo "[API-DRIFT] OpenAPI 타입 drift 검사 중..."
