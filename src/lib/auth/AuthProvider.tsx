@@ -18,6 +18,7 @@ import {
   type ReactNode,
 } from "react";
 import type { components } from "../api/schema";
+import { setUnauthorizedHandler } from "../api/client";
 
 // ─── 타입 ────────────────────────────────────────────────────────────────────
 
@@ -149,6 +150,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     return inflightRefresh;
   }, [fetchMe, clearSession]);
+
+  // apiClient 401 → refresh → 실패 시 logout 트리거
+  useEffect(() => {
+    setUnauthorizedHandler(refreshToken);
+    return () => setUnauthorizedHandler(null);
+  }, [refreshToken]);
 
   // ── 마운트 시 세션 복원 ───────────────────────────────────────────────────
 
