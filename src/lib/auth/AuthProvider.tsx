@@ -25,6 +25,7 @@ import { setUnauthorizedHandler } from "../api/client";
 type User = components["schemas"]["User"];
 type Membership = components["schemas"]["Membership"];
 type LoginRequest = components["schemas"]["LoginRequest"];
+type SignupRequest = components["schemas"]["SignupRequest"];
 
 export interface AuthContextType {
   isAuthenticated: boolean;
@@ -35,6 +36,7 @@ export interface AuthContextType {
   loading: boolean;
   error: string | null;
   login(credentials: LoginRequest): Promise<void>;
+  signup(data: SignupRequest): Promise<void>;
   logout(): Promise<void>;
   refreshToken(): Promise<void>;
 }
@@ -212,6 +214,30 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     [fetchMe],
   );
 
+  // ── signup ─────────────────────────────────────────────────────────────────
+
+  const signup = useCallback(
+    async (data: SignupRequest): Promise<void> => {
+      setError(null);
+      try {
+        await authFetch<unknown>("/auth/signup", {
+          method: "POST",
+          body: JSON.stringify(data),
+        });
+        // 회원가입 성공 후 /me로 사용자 정보 로드
+        const ok = await fetchMe();
+        if (!ok) {
+          throw new Error("FETCH_ME_FAILED");
+        }
+      } catch (e) {
+        const msg = e instanceof Error ? e.message : "SIGNUP_FAILED";
+        if (mountedRef.current) setError(msg);
+        throw e;
+      }
+    },
+    [fetchMe],
+  );
+
   // ── logout ─────────────────────────────────────────────────────────────────
 
   const logout = useCallback(async (): Promise<void> => {
@@ -237,6 +263,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         loading,
         error,
         login,
+        signup,
         logout,
         refreshToken,
       }}
