@@ -1,18 +1,22 @@
 "use client";
 
 import { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useAuth } from "./useAuth";
 
 export function ClientAuthGuard({ children }: { children: React.ReactNode }) {
   const { isAuthenticated, loading } = useAuth();
   const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     if (!loading && !isAuthenticated) {
-      router.replace("/login");
+      const qs = searchParams.toString();
+      const returnTo = qs ? `${pathname}?${qs}` : pathname;
+      router.replace(`/login?returnTo=${encodeURIComponent(returnTo)}`);
     }
-  }, [isAuthenticated, loading, router]);
+  }, [isAuthenticated, loading, router, pathname, searchParams]);
 
   if (loading) {
     return (

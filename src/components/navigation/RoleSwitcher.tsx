@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { LogOut, ArrowLeftRight } from "lucide-react";
 import { useAuth } from "@/lib/auth/useAuth";
 
@@ -22,8 +23,6 @@ export function RoleSwitcher({ mode }: Props) {
     .flatMap((m) => m.roles)
     .some((r) => OPERATOR_ROLES.includes(r));
 
-  const initials = user?.displayName?.[0]?.toUpperCase() ?? "?";
-
   useEffect(() => {
     function handleClick(e: MouseEvent) {
       if (ref.current && !ref.current.contains(e.target as Node)) {
@@ -43,6 +42,19 @@ export function RoleSwitcher({ mode }: Props) {
     setOpen(false);
     router.push(mode === "customer" ? "/operator" : "/");
   }
+
+  if (!user) {
+    return (
+      <Link
+        href="/login"
+        className="text-sm font-semibold text-primary hover:text-primary-dark transition-colors"
+      >
+        로그인
+      </Link>
+    );
+  }
+
+  const initials = user.displayName?.[0]?.toUpperCase() ?? "?";
 
   return (
     <div className="relative" ref={ref}>
