@@ -21,10 +21,7 @@ export default function BookingsPage() {
   const [qrBookingId, setQrBookingId] = useState<number | null>(null);
 
   useEffect(() => {
-    setLoading(true);
-    setBookings([]);
     const tab = TABS.find((t) => t.key === activeTab)!;
-
     Promise.allSettled(
       tab.statuses.map((status) => getMyBookings({ bookingStatus: status, limit: 20 }))
     ).then((results) => {
@@ -37,13 +34,19 @@ export default function BookingsPage() {
     });
   }, [activeTab]);
 
+  function handleTabChange(key: TabKey) {
+    setActiveTab(key);
+    setLoading(true);
+    setBookings([]);
+  }
+
   return (
     <div>
       <div className="sticky top-[56px] z-30 flex border-b border-border bg-white">
         {TABS.map((tab) => (
           <button
             key={tab.key}
-            onClick={() => setActiveTab(tab.key)}
+            onClick={() => handleTabChange(tab.key)}
             className={[
               "flex-1 py-3 text-sm font-semibold transition-colors min-h-[44px]",
               activeTab === tab.key
