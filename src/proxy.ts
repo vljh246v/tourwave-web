@@ -18,7 +18,7 @@ import { verifyOperatorRole, verifyAdminRole } from '@/lib/auth/roleGuard'
 const PUBLIC_PATHS = new Set(['/', '/login', '/signup', '/auth/refresh'])
 
 /** 공개 경로 접두사 (하위 포함) */
-const PUBLIC_PREFIXES = ['/tours']
+const PUBLIC_PREFIXES = ['/tours', '/explore']
 
 const OPERATOR_PREFIX = '/operator'
 const ADMIN_PREFIX = '/admin'

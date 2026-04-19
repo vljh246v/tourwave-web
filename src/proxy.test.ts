@@ -38,4 +38,14 @@ describe("proxy (route guard)", () => {
     expect(res.status).toBe(307);
     expect(res.headers.get("location")).toContain("/login");
   });
+
+  it("/explore 미인증도 통과", () => {
+    const res = proxy(makeRequest("/explore"));
+    expect(res.status).toBe(200);
+  });
+
+  it("/explore/제주-서핑 미인증도 통과", () => {
+    const res = proxy(makeRequest("/explore/제주-서핑"));
+    expect(res.status).toBe(200);
+  });
 });
