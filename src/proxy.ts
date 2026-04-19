@@ -1,5 +1,5 @@
 /**
- * middleware.ts — Next.js 라우트 가드 (Edge Runtime)
+ * proxy.ts — Next.js 16 라우트 가드 (Next.js 16에서 middleware → proxy로 이름 변경)
  *
  * 보호 계층:
  *   1. 비인증 → /login?returnTo=<path> 리다이렉트
@@ -26,7 +26,7 @@ const ADMIN_PREFIX = '/admin'
 /** 보호 라우트 접두사 (인증만 필요, 역할 무관) */
 const AUTH_REQUIRED_PREFIXES = ['/bookings', '/profile', '/favorites']
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
   const token = request.cookies.get('access_token')?.value ?? null
 
