@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import { useState, useEffect, use } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ArrowLeft, Minus, Plus, CheckCircle2 } from "lucide-react";
@@ -8,6 +9,7 @@ import { getQuote } from "@/features/occurrences/api";
 import { createBooking } from "@/features/bookings/api";
 import { formatInTimezone, dateRangeFromNow } from "@/lib/utils/time";
 import { formatMoney } from "@/lib/utils/money";
+import { ClientAuthGuard } from "@/lib/auth/ClientAuthGuard";
 import type { TourDetail, TourOccurrence } from "@/features/tours/api";
 import type { QuoteResponse } from "@/features/occurrences/api";
 import type { Booking } from "@/features/bookings/api";
@@ -81,31 +83,30 @@ export default function BookingFlowPage({
     }
   }
 
-  if (bookingResult) {
-    return (
-      <div className="flex min-h-[70vh] flex-col items-center justify-center px-6 text-center">
-        <CheckCircle2 className="h-16 w-16 text-green-500" />
-        <h2 className="mt-4 font-display text-2xl font-extrabold text-foreground">
-          예약 신청 완료!
-        </h2>
-        <p className="mt-2 text-sm text-muted">
-          예약 #{bookingResult.id} — 운영자 확인 후 최종 확정됩니다.
-        </p>
-        <p className="mt-1 text-xs text-muted">
-          상태: {bookingResult.status === "REQUESTED" ? "확인 대기" : "대기자 명단"}
-        </p>
-        <button
-          onClick={() => router.replace("/bookings")}
-          className="mt-8 w-full max-w-xs rounded-xl bg-accent px-6 py-3 text-sm font-bold text-white min-h-[44px]"
-        >
-          예약 내역 보기
-        </button>
-      </div>
-    );
-  }
-
   return (
-    <div className="flex flex-col pb-28">
+    <Suspense>
+      <ClientAuthGuard>
+      {bookingResult ? (
+        <div className="flex min-h-[70vh] flex-col items-center justify-center px-6 text-center">
+          <CheckCircle2 className="h-16 w-16 text-green-500" />
+          <h2 className="mt-4 font-display text-2xl font-extrabold text-foreground">
+            예약 신청 완료!
+          </h2>
+          <p className="mt-2 text-sm text-muted">
+            예약 #{bookingResult.id} — 운영자 확인 후 최종 확정됩니다.
+          </p>
+          <p className="mt-1 text-xs text-muted">
+            상태: {bookingResult.status === "REQUESTED" ? "확인 대기" : "대기자 명단"}
+          </p>
+          <button
+            onClick={() => router.replace("/bookings")}
+            className="mt-8 w-full max-w-xs rounded-xl bg-accent px-6 py-3 text-sm font-bold text-white min-h-[44px]"
+          >
+            예약 내역 보기
+          </button>
+        </div>
+      ) : (
+        <div className="flex flex-col pb-28">
       <div className="sticky top-[56px] z-30 border-b border-border bg-white px-4 py-3">
         <div className="flex items-center gap-3">
           <button
@@ -321,6 +322,9 @@ export default function BookingFlowPage({
           )}
         </div>
       </div>
-    </div>
+      </div>
+      )}
+      </ClientAuthGuard>
+    </Suspense>
   );
 }
