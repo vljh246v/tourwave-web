@@ -9,7 +9,7 @@ milestone: M1
 domain: auth
 layer: ui
 size: M
-status: backlog
+status: done
 
 depends_on: ['T-010', 'T-912']
 blocks: []
@@ -19,10 +19,10 @@ github_issue: 24
 exec_plan: ""
 
 created: 2026-04-18
-updated: 2026-04-18
+updated: 2026-04-20
 ---
 
-#status/backlog #area/fe
+#status/done #area/fe
 
 # T-008 — [FE] Auth — 로그인 폼 컴포넌트
 

@@ -9,7 +9,7 @@ milestone: cross
 domain: infra
 layer: middleware
 size: M
-status: backlog
+status: done
 
 depends_on: ['T-912']
 blocks: ['T-018', 'T-025']
@@ -19,10 +19,10 @@ github_issue: null
 exec_plan: ""
 
 created: 2026-04-18
-updated: 2026-04-18
+updated: 2026-04-20
 ---
 
-#status/backlog #area/fe
+#status/done #area/fe
 
 # T-915 — [FE] 라우트 가드 middleware.ts (역할 기반 리다이렉트)
 
