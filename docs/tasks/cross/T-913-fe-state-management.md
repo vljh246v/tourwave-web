@@ -1,8 +1,7 @@
 ---
 id: T-913
-title: "T-913 — [FE] 상태 관리 라이브러리 도입 (Zustand 권장)"
+title: T-913 — [FE] 상태 관리 라이브러리 도입 (Zustand 권장)
 aliases: [T-913]
-
 repo: tourwave-web
 area: fe
 milestone: cross
@@ -10,14 +9,11 @@ domain: infra
 layer: state
 size: M
 status: done
-
 depends_on: []
-blocks: ['T-014', 'T-019', 'T-020~T-027']
+blocks: [T-014, T-019, T-020, T-021, T-022, T-023, T-024, T-025, T-026, T-027]
 sub_tasks: []
-
 github_issue: null
-exec_plan: ""
-
+exec_plan: ''
 created: 2026-04-18
 updated: 2026-04-18
 ---

@@ -1,8 +1,7 @@
 ---
 id: T-916
-title: "T-916 — [FE] 디자인 시스템 기본 컴포넌트 (Button/Input/Modal/Card/Form)"
+title: T-916 — [FE] 디자인 시스템 기본 컴포넌트 (Button/Input/Modal/Card/Form)
 aliases: [T-916]
-
 repo: tourwave-web
 area: fe
 milestone: cross
@@ -10,14 +9,12 @@ domain: infra
 layer: design-system
 size: L
 status: done
-
 depends_on: []
-blocks: ['T-008~T-027']
+blocks: [T-008, T-009, T-010, T-011, T-012, T-013, T-014, T-015, T-016, T-017, T-018,
+  T-019, T-020, T-021, T-022, T-023, T-024, T-025, T-026, T-027]
 sub_tasks: []
-
 github_issue: null
-exec_plan: ""
-
+exec_plan: ''
 created: 2026-04-18
 updated: 2026-04-19
 ---
