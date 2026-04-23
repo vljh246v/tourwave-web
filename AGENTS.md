@@ -8,6 +8,8 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 Tourwave 백엔드(`../tourwave`)의 프론트엔드. 투어/액티비티 운영자·고객 화면을 제공한다.
 
+**백엔드 repo:** `/Users/jaehyun/Documents/workspace/tourwave` (별도 repo, Spring Boot + Kotlin). `docs/openapi.yaml`을 SSOT로 공유한다.
+
 ## 작업 진입점
 
 | 작업 유형 | 먼저 읽을 문서 | 시작 명령 |
