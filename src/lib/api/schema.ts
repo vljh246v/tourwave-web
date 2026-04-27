@@ -886,7 +886,10 @@ export interface paths {
         post: {
             parameters: {
                 query?: never;
-                header?: never;
+                header: {
+                    /** @description Client-provided deduplication key for mutation safety */
+                    "Idempotency-Key": components["parameters"]["idempotencyKey"];
+                };
                 path?: never;
                 cookie?: never;
             };
@@ -906,6 +909,7 @@ export interface paths {
                     };
                 };
                 401: components["responses"]["Unauthorized"];
+                422: components["responses"]["Unprocessable"];
             };
         };
         delete?: never;
@@ -989,7 +993,10 @@ export interface paths {
         post: {
             parameters: {
                 query?: never;
-                header?: never;
+                header: {
+                    /** @description Client-provided deduplication key for mutation safety */
+                    "Idempotency-Key": components["parameters"]["idempotencyKey"];
+                };
                 path: {
                     orgId: components["parameters"]["orgId"];
                 };
@@ -1012,6 +1019,7 @@ export interface paths {
                 };
                 403: components["responses"]["Forbidden"];
                 409: components["responses"]["Conflict"];
+                422: components["responses"]["Unprocessable"];
             };
         };
         delete?: never;
@@ -1037,7 +1045,10 @@ export interface paths {
         patch: {
             parameters: {
                 query?: never;
-                header?: never;
+                header: {
+                    /** @description Client-provided deduplication key for mutation safety */
+                    "Idempotency-Key": components["parameters"]["idempotencyKey"];
+                };
                 path: {
                     orgId: components["parameters"]["orgId"];
                     userId: components["parameters"]["userId"];
@@ -1060,6 +1071,7 @@ export interface paths {
                     };
                 };
                 403: components["responses"]["Forbidden"];
+                422: components["responses"]["Unprocessable"];
             };
         };
         trace?: never;
@@ -1077,7 +1089,10 @@ export interface paths {
         post: {
             parameters: {
                 query?: never;
-                header?: never;
+                header: {
+                    /** @description Client-provided deduplication key for mutation safety */
+                    "Idempotency-Key": components["parameters"]["idempotencyKey"];
+                };
                 path: {
                     orgId: components["parameters"]["orgId"];
                     userId: components["parameters"]["userId"];
@@ -1094,6 +1109,7 @@ export interface paths {
                     content?: never;
                 };
                 403: components["responses"]["Forbidden"];
+                422: components["responses"]["Unprocessable"];
             };
         };
         delete?: never;
@@ -1118,7 +1134,10 @@ export interface paths {
         post: {
             parameters: {
                 query?: never;
-                header?: never;
+                header: {
+                    /** @description Client-provided deduplication key for mutation safety */
+                    "Idempotency-Key": components["parameters"]["idempotencyKey"];
+                };
                 path?: never;
                 cookie?: never;
             };
@@ -1138,6 +1157,7 @@ export interface paths {
                     };
                 };
                 401: components["responses"]["Unauthorized"];
+                422: components["responses"]["Unprocessable"];
             };
         };
         delete?: never;
@@ -1202,7 +1222,10 @@ export interface paths {
         post: {
             parameters: {
                 query?: never;
-                header?: never;
+                header: {
+                    /** @description Client-provided deduplication key for mutation safety */
+                    "Idempotency-Key": components["parameters"]["idempotencyKey"];
+                };
                 path: {
                     registrationId: number;
                 };
@@ -1211,13 +1234,16 @@ export interface paths {
             requestBody?: never;
             responses: {
                 /** @description Approved */
-                204: {
+                200: {
                     headers: {
                         [name: string]: unknown;
                     };
-                    content?: never;
+                    content: {
+                        "application/json": components["schemas"]["InstructorRegistration"];
+                    };
                 };
                 403: components["responses"]["Forbidden"];
+                422: components["responses"]["Unprocessable"];
             };
         };
         delete?: never;
@@ -1239,7 +1265,10 @@ export interface paths {
         post: {
             parameters: {
                 query?: never;
-                header?: never;
+                header: {
+                    /** @description Client-provided deduplication key for mutation safety */
+                    "Idempotency-Key": components["parameters"]["idempotencyKey"];
+                };
                 path: {
                     registrationId: number;
                 };
@@ -1248,13 +1277,16 @@ export interface paths {
             requestBody?: never;
             responses: {
                 /** @description Rejected */
-                204: {
+                200: {
                     headers: {
                         [name: string]: unknown;
                     };
-                    content?: never;
+                    content: {
+                        "application/json": components["schemas"]["InstructorRegistration"];
+                    };
                 };
                 403: components["responses"]["Forbidden"];
+                422: components["responses"]["Unprocessable"];
             };
         };
         delete?: never;
@@ -1276,7 +1308,10 @@ export interface paths {
         post: {
             parameters: {
                 query?: never;
-                header?: never;
+                header: {
+                    /** @description Client-provided deduplication key for mutation safety */
+                    "Idempotency-Key": components["parameters"]["idempotencyKey"];
+                };
                 path?: never;
                 cookie?: never;
             };
@@ -1295,6 +1330,8 @@ export interface paths {
                         "application/json": components["schemas"]["InstructorProfile"];
                     };
                 };
+                403: components["responses"]["Forbidden"];
+                422: components["responses"]["Unprocessable"];
             };
         };
         delete?: never;
@@ -1304,7 +1341,10 @@ export interface paths {
         patch: {
             parameters: {
                 query?: never;
-                header?: never;
+                header: {
+                    /** @description Client-provided deduplication key for mutation safety */
+                    "Idempotency-Key": components["parameters"]["idempotencyKey"];
+                };
                 path?: never;
                 cookie?: never;
             };
@@ -1323,6 +1363,8 @@ export interface paths {
                         "application/json": components["schemas"]["InstructorProfile"];
                     };
                 };
+                404: components["responses"]["NotFound"];
+                422: components["responses"]["Unprocessable"];
             };
         };
         trace?: never;
@@ -2708,7 +2750,10 @@ export interface paths {
         post: {
             parameters: {
                 query?: never;
-                header?: never;
+                header: {
+                    /** @description Client-provided deduplication key for mutation safety */
+                    "Idempotency-Key": components["parameters"]["idempotencyKey"];
+                };
                 path: {
                     orgId: components["parameters"]["orgId"];
                 };
@@ -2754,7 +2799,10 @@ export interface paths {
         delete: {
             parameters: {
                 query?: never;
-                header?: never;
+                header: {
+                    /** @description Client-provided deduplication key for mutation safety */
+                    "Idempotency-Key": components["parameters"]["idempotencyKey"];
+                };
                 path: {
                     announcementId: components["parameters"]["announcementId"];
                 };
@@ -2772,6 +2820,7 @@ export interface paths {
                 401: components["responses"]["Unauthorized"];
                 403: components["responses"]["Forbidden"];
                 404: components["responses"]["NotFound"];
+                422: components["responses"]["Unprocessable"];
             };
         };
         options?: never;
@@ -2780,7 +2829,10 @@ export interface paths {
         patch: {
             parameters: {
                 query?: never;
-                header?: never;
+                header: {
+                    /** @description Client-provided deduplication key for mutation safety */
+                    "Idempotency-Key": components["parameters"]["idempotencyKey"];
+                };
                 path: {
                     announcementId: components["parameters"]["announcementId"];
                 };
@@ -4982,7 +5034,10 @@ export interface paths {
         post: {
             parameters: {
                 query?: never;
-                header?: never;
+                header: {
+                    /** @description Client-provided deduplication key for mutation safety */
+                    "Idempotency-Key": components["parameters"]["idempotencyKey"];
+                };
                 path: {
                     sourceType: "REFUND" | "NOTIFICATION_DELIVERY" | "PAYMENT_WEBHOOK";
                     sourceKey: string;
@@ -5007,6 +5062,7 @@ export interface paths {
                 401: components["responses"]["Unauthorized"];
                 403: components["responses"]["Forbidden"];
                 404: components["responses"]["NotFound"];
+                422: components["responses"]["Unprocessable"];
             };
         };
         delete?: never;
